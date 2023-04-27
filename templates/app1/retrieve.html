@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block b1 %}
+    {{msg}} <br>
+    <style>
+        table,th,tr,td{
+            margin: auto;border: 2px solid blanchedalmond;
+        }
+    </style>
+  <table>
+            <thead>
+                <tr>
+                    <th style="width: 10;">NAME</th>
+                    <th style="width: 10;">AGE</th>
+                    <th style="width: 10;">GENDER</th>
+                    <th style="width: 10;">PHNO</th>
+                    <th style="width: 10;">UPDATE / DELETE</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in data1 %}
+                    <tr>
+                        <td style="width: 10;">{{i.name}}</td>
+                        <td style="width: 10;">{{i.age}}</td>
+                        <td style="width: 10;">{{i.gender}}</td>
+                        <td style="width: 10;">{{i.phno}}</td>
+                        <td style="width: 10;">
+                                <form action="{% url 'app1:delete' i.id %}"method="post">
+                                        {% csrf_token %}
+                                        <a class="btn btn-sm-dark" href="{% url 'app1:update' i.id %}">UPDATE</a>
+                                    <input class="btn btn-sm-danger" type="submit" value="DELETE">
+                                </form>
+                        </td>
+                    </tr>
+                {% endfor%}
+            </tbody>
+  </table>
+{% endblock  %}
